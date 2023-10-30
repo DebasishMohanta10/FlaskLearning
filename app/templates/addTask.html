@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container py-5">
+        <h1 class="text-center">Add task to Todos</h1>
+        <form action="" method="post">
+            {{ form.csrf_token }}
+            <div class="mb-2">
+                <div class="m-2">
+                    <p>{{ form.name.label }}:</p>
+                    {{form.name(class="form-control",placeholder='Task Name')}}
+                </div>
+                <div class="m-2">
+                    <p>{{ form.description.label }}:</p>
+                    {{form.description(class="form-control",placeholder='Enter task details')}}
+                </div>
+                <div class="m-2">
+                    <p>{{form.deadline.label}}:</p>
+                    {{form.deadline(class="form-control")}}
+                </div>
+                <div class="m-2" style="margin: 20px auto;">
+                    <p>{{form.submit(class='btn btn-primary')}}</p>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

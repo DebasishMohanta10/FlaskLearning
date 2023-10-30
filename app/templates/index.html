@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="py-5">
+        <h1 class="text-center mb-4">Todo App</h1>
+        <p class="text-center mb-4">Add and customize task on your won preference</p>
+
+        <div class="search" style="margin-bottom:10px;">
+            <div style="float: left;">
+                <a href="{{ url_for('.index') }}" class="btn btn-sm btn-outline-secondary">all tasks</a>
+                <!-- <a href="">sort by deadline</a> -->
+            </div>
+            <form method='get' action="{{ url_for('.search') }}" style="float: right; margin-bottom:10px;">
+                {{form.csrf_token}}
+                {{form.q(class="form-control rounded-0",placeholder="Search Name ...",value=query)}}
+                
+                <button type="submit" class="btn btn-light rounded-0"><span>🔍</span></button>     
+
+            </form>
+        </div>
+
+        <div>
+            <table class="table" border="1">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>deadline</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for todo in todos %}
+                    <tr>
+                        <td>{{loop.index}}</td>
+                        <td>{{todo[1]}}</td>
+                        <td>{{todo[2]}}</td>
+                        <td>{{todo[3]}}</td>
+                        <td><a class="text-decoration-none" href="{{url_for('.remove_task',id=todo[0])}}">❎</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="text-center mt-5">
+            <a href="{{url_for('.addTask')}}" class="btn btn-primary rounded-1">Add a new Task</a>
+        </div>
+    </div>
+{% endblock %}
